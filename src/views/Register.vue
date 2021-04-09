@@ -3,10 +3,10 @@
         <form @submit.prevent="Register" class="modal">
             Sign up here
             <hr class="register-header">
-            <input type="text" placeholder="Name" v-model="name" required>
-            <input type="email" placeholder="E-Mail" v-model="email" required>
-            <input type="password" placeholder="Password" v-model="password" required>
-            <select v-model="role" class="input" required>
+            <input type="text" placeholder="Name" v-model="form.name" required>
+            <input type="email" placeholder="E-Mail" v-model="form.email" required>
+            <input type="password" placeholder="Password" v-model="form.password" required>
+            <select v-model="form.roleID" class="input" required>
                 <option value="" disabled selected>Select your role</option>
                 <option value=1>QA</option>
                 <option value=2>Developer</option>
@@ -15,21 +15,35 @@
             <hr>
             <button type="button" class="button" @click="stopRegister">Already have an account?</button>
         </form>
-        {{role}}
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     data() {
         return {
-            role: '',
-            name: '',
-            email: '',
-            password: ''
+            form: {
+                roleID: '',
+                name: '',
+                email: '',
+                password: ''
+            }
         }
     },
     methods: {
+        ...mapActions({
+            signUp: 'auth/signUp'
+        }),
+        Register() {
+            this.form.roleID = parseInt(this.form.roleID)
+            this.signUp(this.form).then(() => {
+                this.$router.replace('/')
+            }).catch(() => {
+                console.log('Register request failed.');
+            })
+        },
         stopRegister() {
             console.log('hit')
             this.$emit('stop')

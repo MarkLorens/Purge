@@ -48,6 +48,13 @@ export default {
         signOut({ commit }){
             commit('SET_TOKEN', null)
             commit('SET_USER', null)
+        },
+        async signUp({ dispatch }, credentials) {
+            let response = await axios.post('/v1/public/register', credentials)
+
+            if(response.status == 201) {
+                return dispatch('signIn', credentials)
+            }
         }
     }
 }
