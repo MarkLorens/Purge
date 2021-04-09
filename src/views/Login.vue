@@ -1,0 +1,116 @@
+<template>
+    <form @submit.prevent="Login">
+        <input class="input" type="email" placeholder="E-Mail" v-model="email" required>
+        <input class="input" type="password" placeholder="Password" v-model="password" required>
+        <div class="checkbox">
+        <input id="check" type="checkbox">
+        <label for="check">Remember Me</label>
+        <div class="error">
+            <p v-if="isUnauthorized">Invalid email or password</p>
+        </div>
+        </div>
+        <input type="submit" value="Login">
+        <hr>
+        <button type="button" class="button" @click="startRegister">Create new account</button>
+    </form>
+    <div class="register" v-if="register">
+        <Register @stop="startRegister" />
+    </div>
+</template>
+
+<script>
+import Register from './Register.vue'
+
+export default {
+    components: {
+        Register
+    },
+    data() {
+        return {
+            email: '',
+            password: '',
+            remember: false,
+            register: false,
+            isUnauthorized: false,
+            unauthorized: ''
+        }
+    },
+    methods: {
+        startRegister(){
+            this.register = !this.register
+        }
+    }
+}
+</script>
+
+<style>
+    form {
+        max-width: 420px;
+        margin: 30px auto;
+        background: white;
+        text-align: left;
+        padding: 40px;
+        border-radius: 10px;
+        }
+    label {
+        color: #aaa;
+        display: inline-block;
+        margin: 25px 0 15px;
+        font-size: 0.6em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        }
+    .error {
+        color: red;
+        font-size: 0.7em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+    ::-webkit-input-placeholder {
+        font-size: 0.7em !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-weight: bold !important;
+        }
+    input, .input{
+        background: white;
+        display: block;
+        padding: 10px 6px;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 1px solid rgb(184, 183, 183);
+        color: #555;
+        }
+    input[type="checkbox"] {
+        display: inline-block;
+        width: 16px;
+        margin: 0 10px 0 0;
+        position: relative;
+        top: 2px;
+        }
+    input[type="submit"], .button {
+        background: #0b5dff;
+        border: 0;
+        padding: 10px 20px;
+        margin-top: 20px;
+        color: white;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        border-radius: 3px;
+        }
+    hr{
+        margin-top: 10px;
+        border: 1px solid rgb(184, 183, 183)
+        }
+    .button {
+        margin-left: 40px;
+        width: 80%;
+        background: yellowgreen;
+        margin-top: 5px;
+        }
+</style>
