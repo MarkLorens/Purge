@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="Login">
-        <input class="input" type="email" placeholder="E-Mail" v-model="email" required>
-        <input class="input" type="password" placeholder="Password" v-model="password" required>
+        <input class="input" type="email" placeholder="E-Mail" v-model="form.email" required>
+        <input class="input" type="password" placeholder="Password" v-model="form.password" required>
         <div class="checkbox">
         <input id="check" type="checkbox">
         <label for="check">Remember Me</label>
@@ -20,6 +20,7 @@
 
 <script>
 import Register from './Register.vue'
+import { mapActions } from 'vuex'
 
 export default {
     components: {
@@ -27,15 +28,27 @@ export default {
     },
     data() {
         return {
-            email: '',
-            password: '',
-            remember: false,
+            form: {
+                email: '',
+                password: '',
+                remember: false,
+            },
             register: false,
             isUnauthorized: false,
             unauthorized: ''
         }
     },
     methods: {
+        ...mapActions({
+            signIn: 'auth/signIn'
+        }),
+        Login() {
+            this.signIn(this.form).then(() => {
+                this.$router.replace('/')
+            }).catch(() => {
+                console.log('failed');
+            })
+        },
         startRegister(){
             this.register = !this.register
         }
