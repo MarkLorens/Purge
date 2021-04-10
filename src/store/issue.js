@@ -3,17 +3,21 @@ import axios from 'axios'
 export default {
     namespaced: true,
     state: {
-        issues: []
+        issues: [],
+        specificIssue: []
     },
     getters : {
-        allIssues: (state) => state.issues
+        allIssues: (state) => state.issues,
+        issueDetails: (state) => state.specificIssue
     },
     mutations: {
         SET_ISSUES: (state, issues) =>
-            state.issues = issues
+            state.issues = issues,
+        SET_DETAILS: (state, specificIssue) =>
+            state.specificIssue = specificIssue
     },
     actions: {
-        async fetchIssues({ commit}) {
+        async fetchIssues({ commit }) {
             const response = await axios.get('/v1/protected/issue/index', {
                 headers: {
                     token: localStorage.getItem('token'),
@@ -21,6 +25,15 @@ export default {
                 }
             })
             commit('SET_ISSUES', response.data.data)
+        },
+        async fetchIssuesID({ commit }, id) {
+            const response = await axios.get(`/v1/protected/issue/show/${id}`, {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: localStorage.getItem('uID')
+                }
+            })
+            commit('SET_DETAILS', response.data.data)
         },
         async createIssue({__}, form) {
             const response = await axios.post('/v1/protected/issue/create', form, {

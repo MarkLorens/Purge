@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <!-- <ul>
       <li class="list-head">Sort by</li>
       <li><a href="#">Severity</a></li>
       <li><a href="#">Status</a></li>
@@ -16,6 +16,9 @@
           <option value="1">3</option>
         </select>
       </li>
+    </ul> -->
+    <ul>
+      <li><a href="#">Coming Soon</a></li>
     </ul>
 </template>
 

@@ -2,10 +2,10 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li class="dropdown" style="float:right">
-          <a href="javascript:void(0)" class="dropbtn"> Options <i class="arrow down"></i> </a>
+          <a href="javascript:void(0)" class="dropbtn"> Account <i class="arrow down"></i> </a>
           <div class="dropdown-content">
-            <a @click="Logout">Logout</a>
             <a href="/chpwd">Change Password</a>
+            <a @click="Logout">Logout</a>
           </div>
       </li>
       <li class="notif"><i class="far fa-bell"></i></li>
@@ -98,5 +98,8 @@ li.dropdown {
   float: right;
   margin-top: 15px;
   margin-right: 8px;
+}
+.notif:hover {
+  cursor: pointer;
 }
 </style>

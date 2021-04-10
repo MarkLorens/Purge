@@ -4,14 +4,14 @@
   <button class="btn_create" @click="createNew"><p>Create new issue</p></button>
   <div class="issues" v-if="loaded">
     <div class="issue" v-for="issue in allIssues" :key="issue.id">
-      <span> {{ issue.Title }} </span>
+      <router-link :to="{ name: 'IssueDetails', params: { id: issue.ID } }" class="link">{{ issue.Title }}</router-link>
       <span>Severity: {{ issue.Severity }}; Status: {{ issue.Status }}</span>
       <span style="color:#a6a6a1">Updated: {{ issue.UpdatedAt }}</span>
       <span class="created">Created: {{ issue.CreatedAt }}</span>
     </div>
   </div>
   <div class="issues" v-else>
-    <div class="">
+    <div>
       <span style="color:white">Loading data...</span>
     </div>
   </div>
@@ -68,14 +68,12 @@ export default {
   border-radius: 5px;
   text-align: left;
   position: relative;
-  cursor: pointer;
 }
 .created {
   position: absolute;
   bottom: 10px;
   right: 10px;
   color: #a6a6a1;
-  cursor: pointer;
 }
 span {
   margin-top: 3px;
@@ -90,5 +88,8 @@ span {
   height: 50px;
   color: white;
   cursor: pointer;
+}
+.link {
+  color: #7ccab5;
 }
 </style>

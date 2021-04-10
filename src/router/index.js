@@ -55,6 +55,20 @@ const routes = [
       }
       next()
     }
+  },
+  {
+    path: '/:id',
+    name: 'IssueDetails',
+    component: () => import('../views/Issue/IssueDetails.vue'),
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters['auth/authenticated']){
+        return next({
+          name: 'Login'
+        })
+      }
+      next()
+    }
   }
 ]
 
