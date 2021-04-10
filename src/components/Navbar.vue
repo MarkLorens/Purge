@@ -33,8 +33,12 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  min-height: 3rem;
+  position: sticky;
+  top: 0;
   background-color: black;
+  z-index: 1;
+  overscroll-behavior: none;
 }
 li {
   float: left;
@@ -56,11 +60,11 @@ li.dropdown {
 }
 .dropdown-content {
   display: none;
-  position: absolute;
+  position: sticky;
   background: black;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgb(139, 132, 132);
-  z-index: 1;
+  z-index: 2;
 }
 .dropdown-content a {
   color: #fbce7b;
@@ -77,7 +81,7 @@ li.dropdown {
   display: block;
 }
 .arrow {
-  border: solid white;
+  border: solid #fbce7b;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;

@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <Sidebar />
-  <button class="btn_create"><p>Create new issue</p></button>
+  <button class="btn_create" @click="createNew"><p>Create new issue</p></button>
   <div class="issues" v-if="loaded">
     <div class="issue" v-for="issue in allIssues" :key="issue.id">
       <span> {{ issue.Title }} </span>
@@ -36,7 +36,10 @@ export default {
   methods: {
     ...mapActions({
       fetchIssues: 'issue/fetchIssues'
-    })
+    }),
+    createNew(){
+      this.$router.replace('/createIssue')
+    }
   },
   computed: {
     ...mapGetters({

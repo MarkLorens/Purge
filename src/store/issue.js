@@ -21,6 +21,14 @@ export default {
                 }
             })
             commit('SET_ISSUES', response.data.data)
+        },
+        async createIssue({__}, form) {
+            const response = await axios.post('/v1/protected/issue/create', form, {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: localStorage.getItem('uID')
+                }
+            })
         }
     }
 }
