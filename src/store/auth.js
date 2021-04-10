@@ -4,16 +4,19 @@ export default {
     namespaced: true,
     state: {
         token: null,
-        user: null
+        user: null,
+        msg: null
     },
 
     getters: {
         authenticated(state) {
             return state.token && state.user
         },
-
         user(state) {
             return state.user 
+        },
+        msg(state) {
+            return state.msg
         }
     },
     mutations: {
@@ -22,6 +25,9 @@ export default {
         },
         SET_USER(state, data){
             state.user = data
+        },
+        SET_MSG(state, msg) {
+            state.msg = msg
         }
     },
     actions: {
@@ -42,7 +48,6 @@ export default {
                 //Invalid token, delete token and user data
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
-                console.log('Failed');
             }
          },
         signOut({ commit }){
@@ -55,6 +60,15 @@ export default {
             if(response.status == 201) {
                 return dispatch('signIn', credentials)
             }
+        },
+        async changePassword({__ }, credentials) {
+            var id = localStorage.getItem('uID')
+            await axios.patch(`/v1/protected/user/${id}/change-password`, credentials, {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: id
+                }
+            })
         }
     }
 }

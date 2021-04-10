@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Index/Home.vue'
 import store from '@/store'
 
 
@@ -20,11 +20,24 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/Auth/Login.vue'),
     beforeEnter: (to, from, next) => {
       if(store.getters['auth/authenticated']){
         return next({
           name: 'Home'
+        })
+      }
+      next()
+    }
+  },
+  {
+    path: '/chpwd',
+    name: 'ChangePassword',
+    component: () => import('../views/Auth/ChangePassword.vue'),
+    beforeEnter: (to, from, next) => {
+      if(!store.getters['auth/authenticated']){
+        return next({
+          name: 'Login'
         })
       }
       next()

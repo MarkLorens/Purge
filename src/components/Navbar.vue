@@ -5,6 +5,7 @@
           <a href="javascript:void(0)" class="dropbtn"> Options <i class="arrow down"></i> </a>
           <div class="dropdown-content">
             <a @click="Logout">Logout</a>
+            <a href="/chpwd">Change Password</a>
           </div>
       </li>
       <li class="notif"><i class="far fa-bell"></i></li>

@@ -48,8 +48,9 @@ export default {
                 this.$router.replace('/')
             }).catch(() => {
                 this.isUnauthorized = true
-                this.form = ''
             })
+            this.form.email = ''
+            this.form.password = ''
         },
         startRegister(){
             this.register = !this.register
@@ -66,15 +67,6 @@ export default {
         text-align: left;
         padding: 40px;
         border-radius: 10px;
-        }
-    label {
-        color: #aaa;
-        display: inline-block;
-        margin: 25px 0 15px;
-        font-size: 0.6em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
         }
     .error {
         color: red;
@@ -99,13 +91,13 @@ export default {
         border-bottom: 1px solid rgb(184, 183, 183);
         color: #555;
         }
-    input[type="checkbox"] {
+    /* input[type="checkbox"] {
         display: inline-block;
         width: 16px;
         margin: 0 10px 0 0;
         position: relative;
         top: 2px;
-        }
+        } */
     input[type="submit"], .button {
         background: #0b5dff;
         border: 0;
