@@ -3,8 +3,9 @@
         <input class="input" type="email" placeholder="E-Mail" v-model="form.email" required>
         <input class="input" type="password" placeholder="Password" v-model="form.password" required>
         <div class="checkbox">
-        <input id="check" type="checkbox">
-        <label for="check">Remember Me</label>
+        <!-- <input id="check" type="checkbox">
+        <label for="check">Remember Me</label> -->
+        <br>
         <div class="error">
             <p v-if="isUnauthorized">Invalid email or password</p>
         </div>
@@ -35,7 +36,6 @@ export default {
             },
             register: false,
             isUnauthorized: false,
-            unauthorized: ''
         }
     },
     methods: {
@@ -44,9 +44,11 @@ export default {
         }),
         Login() {
             this.signIn(this.form).then(() => {
+                this.form = ''
                 this.$router.replace('/')
             }).catch(() => {
-                console.log('failed');
+                this.isUnauthorized = true
+                this.form = ''
             })
         },
         startRegister(){
