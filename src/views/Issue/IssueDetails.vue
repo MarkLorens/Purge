@@ -1,22 +1,33 @@
 <template>
   <Navbar />
   <template v-if="loaded">
-    <h2> {{ issueDetails.Title }}</h2>
+    <h2> {{ issueDetails.issue.Title }}</h2>
     <div class="wrapper">
       <label>Description </label>
-      <span>{{ issueDetails.Body }}</span>
+      <span>{{ issueDetails.issue.Body }}</span>
       <label>Severity </label>
-      <span>{{ issueDetails.Severity }} </span>
+      <span>{{ issueDetails.issue.Severity }} </span>
       <label>Status </label>
-      <span>{{ issueDetails.Status }}</span>
+      <span>{{ issueDetails.issue.Status }}</span>
       <label>Created At</label>
-      <span>{{ issueDetails.CreatedAt }}</span>
+      <span>{{ issueDetails.issue.CreatedAt }}</span>
       <label>Last Updated </label>
-      <span>{{ issueDetails.UpdatedAt }} </span>
+      <span>{{ issueDetails.issue.UpdatedAt }} </span>
+    </div>
+    <div class="replies" v-if="isOpen">
+      <div class="reply">
+        <input type="text" v-model="Body" placeholder="Leave a comment...">
+        <button @click="SubmitReply(issueDetails.issue)">Submit</button>
+      </div>
+    </div>
+    <div class="replies" v-else>
+      <div class="reply">
+        <span style="color:green">Issue Completed. Comment disabled</span>
+      </div>
     </div>
     <div class="replies">
-      <div class="reply" v-for="reply in issueDetails.Replies" :key="reply.id">
-        <span style="color:#fbce7b"> {{ reply.UserID }} </span>
+      <div class="reply" v-for="reply in issueDetails.replies" :key="reply.id">
+        <span style="color:#fbce7b"> {{ issueDetails.issue.UserName }} </span>
         <span> {{ reply.Body }}</span>
         <span class="created">{{ reply.CreatedAt }}</span>
       </div>
@@ -38,21 +49,48 @@ export default {
   },
   data() {
     return {
-      loaded: false
+      loaded: false,
+      isOpen: true,
+      Body: ''
     }
   },
   methods: {
     ...mapActions ({
-      fetchIssuesID: 'issue/fetchIssuesID'
-    })
+      fetchIssuesID: 'issue/fetchIssuesID',
+      postReply: 'issue/postReply'
+    }),
+    SubmitReply(issue) {
+      var issueID =  issue.ID
+      var Body = this.Body
+      this.postReply({
+        issueID,
+        Body
+      }).then(() => {
+        alert("Comment posted")
+        this.Body = ''
+        this.fetchIssuesID(this.id).then(() => {
+          this.loaded = true
+        })
+      })
+      .catch(() => {
+        console.log("Post failed at VUE:70");
+      })
+    }
   },
   computed: {
     ...mapGetters({
       issueDetails: 'issue/issueDetails'}),
   },
   created() {
-    this.fetchIssuesID(this.id).then(() => {
+    this.fetchIssuesID(this.id)
+    .then(() => {
       this.loaded = true
+      if(this.issueDetails.issue.Status == 0){
+        this.isOpen = false
+      }
+    })
+    .catch(() => {
+      console.log('Failed');
     })
   }
 }
@@ -82,7 +120,7 @@ export default {
         color: #6acbfe;
     }
 
-.replies, button {
+.replies {
   display: grid;
   max-width: 900px;
   margin: 20px auto;
@@ -105,5 +143,22 @@ span {
 .loading {
   margin-top: 30px;
   color: white;
+}
+input {
+  width: 100%;
+  padding-bottom: 80px;
+  padding-left: 3px;
+  padding-top: 5px;
+  text-align: top;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-family: inherit;
+}
+button {
+  float:right;
+  margin-top: 10px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
 }
 </style>

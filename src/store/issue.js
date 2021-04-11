@@ -33,7 +33,7 @@ export default {
                     userId: localStorage.getItem('uID')
                 }
             })
-            commit('SET_DETAILS', response.data.data)
+            commit('SET_DETAILS', response.data)
         },
         async createIssue(_, form) {
             const response = await axios.post('/v1/protected/issue/create', form, {
@@ -45,6 +45,18 @@ export default {
         },
         async deleteIssue(_, id) {
             await axios.delete(`/v1/protected/issue/delete/${id}`, {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: localStorage.getItem('uID')
+                }
+            })
+        },
+        async postReply(_, form) {
+            await axios.post(`/v1/protected/issue/show/${form.issueID}/reply`,
+            {
+                Body: form.Body
+            }, 
+            {
                 headers: {
                     token: localStorage.getItem('token'),
                     userId: localStorage.getItem('uID')
