@@ -24,6 +24,7 @@ import Register from './Register.vue'
 import { mapActions } from 'vuex'
 
 export default {
+    name: 'Login',
     components: {
         Register
     },
