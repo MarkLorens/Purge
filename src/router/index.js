@@ -57,7 +57,7 @@ const routes = [
     }
   },
   {
-    path: '/:id',
+    path: '/issue/:id',
     name: 'IssueDetails',
     component: () => import('../views/Issue/IssueDetails.vue'),
     props: true,
@@ -69,7 +69,21 @@ const routes = [
       }
       next()
     }
-  }
+  },
+  {
+    path: '/userprofile/:id',
+    name: 'UserProfile',
+    component: () => import('../views/Auth/UserProfile.vue'),
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if(!store.getters['auth/authenticated']){
+        return next({
+          name: 'Login'
+        })
+      }
+      next()
+    }
+  },
 ]
 
 const router = createRouter({

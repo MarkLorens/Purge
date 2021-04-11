@@ -4,6 +4,7 @@
         <li class="dropdown" style="float:right">
           <a href="javascript:void(0)" class="dropbtn"> Account <i class="arrow down"></i> </a>
           <div class="dropdown-content">
+            <router-link :to="{ name: 'UserProfile', params: { id: uid } }">My Profile</router-link>
             <a href="/chpwd">Change Password</a>
             <a @click="Logout">Logout</a>
           </div>
@@ -16,6 +17,11 @@ import { mapActions } from 'vuex'
 
 export default {
     name: 'Home',
+    data() {
+      return {
+        uid: localStorage.getItem('uID')
+      }
+    },
     methods: {
         ...mapActions({
             signOutAttempt: 'auth/signOut'

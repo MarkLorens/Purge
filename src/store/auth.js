@@ -4,8 +4,7 @@ export default {
     namespaced: true,
     state: {
         token: null,
-        user: null,
-        msg: null
+        user: null
     },
 
     getters: {
@@ -14,9 +13,6 @@ export default {
         },
         user(state) {
             return state.user 
-        },
-        msg(state) {
-            return state.msg
         }
     },
     mutations: {
@@ -25,9 +21,6 @@ export default {
         },
         SET_USER(state, data){
             state.user = data
-        },
-        SET_MSG(state, msg) {
-            state.msg = msg
         }
     },
     actions: {
