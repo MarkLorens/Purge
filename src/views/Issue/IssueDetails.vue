@@ -27,6 +27,7 @@
     </div>
     <div class="replies">
       <div class="reply" v-for="reply in issueDetails.replies" :key="reply.id">
+        <i class="fas fa-backspace" @click="DeleteReply(reply) "></i> 
         <span style="color:#fbce7b"> {{ issueDetails.issue.UserName }} </span>
         <span> {{ reply.Body }}</span>
         <span class="created">{{ reply.CreatedAt }}</span>
@@ -57,7 +58,8 @@ export default {
   methods: {
     ...mapActions ({
       fetchIssuesID: 'issue/fetchIssuesID',
-      postReply: 'issue/postReply'
+      postReply: 'issue/postReply',
+      deleteReply: 'issue/deleteReply'
     }),
     SubmitReply(issue) {
       var issueID =  issue.ID
@@ -75,6 +77,26 @@ export default {
       .catch(() => {
         console.log("Post failed at VUE:70");
       })
+    },
+    DeleteReply(reply) {
+      var confirm = window.confirm('Delete Reply?')
+      if(confirm) {
+        var replyID = reply.ID
+        var issueID = this.id
+        this.deleteReply({
+          replyID,
+          issueID 
+        })
+          .then(() => {
+            alert('Reply successfully deleted')
+            this.fetchIssuesID(this.id).then(() => {
+              this.loaded = true
+            })
+          })
+          .catch(() => {
+            console.log('Delete failed at VUE:97');
+          })
+      }
     }
   },
   computed: {
@@ -160,5 +182,10 @@ button {
   width: 80px;
   height: 30px;
   border-radius: 5px;
+}
+i {
+  float: right;
+  color: white;
+  cursor: pointer;
 }
 </style>

@@ -62,6 +62,15 @@ export default {
                     userId: localStorage.getItem('uID')
                 }
             })
+        },
+        async deleteReply(_, form) {
+            await axios.delete(`/v1/protected/issue/show/${form.issueID}/delete-reply/${form.replyID}`, 
+            {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: localStorage.getItem('uID')
+                }
+            })
         }
     }
 }
