@@ -1,24 +1,13 @@
 <template>
-    <!-- <ul>
-      <li class="list-head">Sort by</li>
-      <li><a href="#">Severity</a></li>
-      <li><a href="#">Status</a></li>
-      <li><a href="#">Created Date</a></li>
-      <li><a href="#">Last Updated</a></li>
-      <li><a href="#">Title</a></li>
-      <li class="list-head">Filter</li>
-      <li><a href="#">Completed</a></li>
-      <li><a href="#">Replied</a></li>
-      <li class="special">Severity Of:
-        <select>
-          <option value="1">1</option>
-          <option value="1">2</option>
-          <option value="1">3</option>
-        </select>
-      </li>
-    </ul> -->
     <ul>
-      <li><a href="#">Coming Soon</a></li>
+      <li><span style="font-weight: bold">Legend</span></li>
+      <li class="list-head">Status</li>
+      <li><span>0: Closed</span></li>
+      <li><span>1: Opened</span></li>
+      <li class="list-head">Severity</li>
+      <li><span>1: Low</span></li>
+      <li><span>2: Medium</span></li>
+      <li><span>3: High</span></li>
     </ul>
 </template>
 
@@ -40,7 +29,7 @@ ul {
   overflow: auto;
 }
 
-li a, .special {
+li span, .special {
   display: block;
   color: #fbce7b;
   padding: 8px 16px;
@@ -48,10 +37,10 @@ li a, .special {
 }
 
 /* Change the link color on hover */
-li a:hover {
+/* li a:hover {
   background-color: white;
   color: black;
-}
+} */
 .list-head {
   color: white;
   text-align: left;
