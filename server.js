@@ -1,12 +1,13 @@
-var history = require('connect-history-api-fallback');
+const express = require('express')
+const serveStatic = require('serve-static')
+const history = require('connect-history-api-fallback')
+const enfore = require('express-sslify')
+const path = require('path')
 
-var express = require('express')
-var path = require('path')
-var serveStatic = require('serve-static')
-app = express()
-//add this middleware
-app.use(history());    
-app.use(serveStatic(__dirname))
-var port = process.env.PORT || 5000
-app.listen(port)
-console.log('server started '+ port) 
+const app = express();
+
+app.use(enfore.HTTPS({ trustProtoHeader: true }));
+app.use(serveStatic(__dirname + '/dist'));
+app.use(history());
+
+app.listen(process.env.PORT || 5000);
