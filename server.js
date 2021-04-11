@@ -1,12 +1,9 @@
-const express = require('express')
-const serveStatic = require('serve-static')
-const history = require('connect-history-api-fallback')
-const enfore = require('express-sslify')
-
-const app = express();
-
-app.use(enfore.HTTPS({ trustProtoHeader: true }));
-app.use(serveStatic(__dirname + '/dist'));
-app.use(history);
-
-app.listen(process.env.PORT || 5000);
+let servestatic = require('serve-static')
+let path = require('path')
+let express = require('express')
+let port = process.env.PORT || 3000;
+app = express();
+if(process.env.NODE_ENV === 'production'){
+   app.use(servestatic(path.join(path.resolve(), 'dist')));
+}
+app.listen(port, () => {console.log("API server started on "+app.get('port'));});
