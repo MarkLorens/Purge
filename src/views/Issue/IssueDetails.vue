@@ -14,9 +14,6 @@
       <label>Last Updated </label>
       <span>{{ issueDetails.UpdatedAt }} </span>
     </div>
-    <!-- <div v-for="reply in issueDetails.Replies" :key="reply.id" style="color:white">
-      <p>This: {{ reply.Body }}</p>
-    </div> -->
     <div class="replies">
       <div class="reply" v-for="reply in issueDetails.Replies" :key="reply.id">
         <span style="color:#fbce7b"> {{ reply.UserID }} </span>
@@ -94,9 +91,7 @@ export default {
   gap: 2rem;
 }
 .reply {
-  border: 1px solid white;
   padding: 1rem;
-  border-radius: 5px;
   text-align: left;
   position: relative;
 }
