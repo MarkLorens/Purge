@@ -14,7 +14,9 @@ const routes = [
           name: 'Login'
         })
       }
-      next()
+      else{
+        next()
+      }
     }
   },
   {
@@ -27,7 +29,9 @@ const routes = [
           name: 'Home'
         })
       }
-      next()
+      else {
+        next()
+      }
     }
   },
   {
@@ -40,7 +44,9 @@ const routes = [
           name: 'Login'
         })
       }
-      next()
+      else {
+        next()
+      }
     }
   },
   {
@@ -53,7 +59,9 @@ const routes = [
           name: 'Login'
         })
       }
-      next()
+      else {
+        next()
+      }
     }
   },
   {
@@ -67,7 +75,9 @@ const routes = [
           name: 'Login'
         })
       }
-      next()
+      else {
+        next()
+      }
     }
   },
   {
@@ -81,7 +91,9 @@ const routes = [
           name: 'Login'
         })
       }
-      next()
+      else {
+        next()
+      }
     }
   },
 ]
