@@ -6,7 +6,8 @@ import axios from 'axios'
 
 require('@/store/subscriber')
 
-axios.defaults.baseURL = 'https://purge-api-m22a79rthynn.herokuapp.com/'
+var baseUrl = 'https://purge-api-m22a79rthynn.herokuapp.com/'
+axios.defaults.baseURL = baseUrl
 
 store.dispatch('auth/attempt', localStorage.getItem('token'))
 
