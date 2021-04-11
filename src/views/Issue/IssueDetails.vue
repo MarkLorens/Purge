@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <template v-if="loaded">
-    <h2 style="color:white"> {{ issueDetails.Title }}</h2>
+    <h2> {{ issueDetails.Title }}</h2>
     <div class="wrapper">
       <label>Description </label>
       <span>{{ issueDetails.Body }}</span>

@@ -4,6 +4,7 @@
   <button class="btn_create" @click="createNew"><p>Create new issue</p></button>
   <div class="issues" v-if="loaded">
     <div class="issue" v-for="issue in allIssues" :key="issue.id">
+      <i class="fas fa-backspace" @click="Delete(issue) "></i> 
       <router-link :to="{ name: 'IssueDetails', params: { id: issue.ID } }" class="link">{{ issue.Title }}</router-link>
       <span>Severity: {{ issue.Severity }}; Status: {{ issue.Status }}</span>
       <span style="color:#a6a6a1">Updated: {{ issue.UpdatedAt }}</span>
@@ -35,10 +36,26 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchIssues: 'issue/fetchIssues'
+      fetchIssues: 'issue/fetchIssues',
+      deleteIssue: 'issue/deleteIssue'
     }),
     createNew(){
       this.$router.replace('/createIssue')
+    },
+    Delete(issue) {
+      var confirm = window.confirm("Delete " + issue.Title + "?")
+      if (confirm){
+        this.deleteIssue(issue.ID)
+          .then(() => {
+            alert('Issue successfully deleted')
+            this.fetchIssues().then(() => {
+              this.loaded = true
+            })
+          })
+          .catch(() => {
+            console.log('Delete failed at VUE:53');
+          })
+      }
     }
   },
   computed: {
@@ -91,5 +108,10 @@ span {
 }
 .link {
   color: #7ccab5;
+}
+i {
+  float: right;
+  color: white;
+  cursor: pointer;
 }
 </style>

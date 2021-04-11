@@ -16,4 +16,9 @@ body {
   margin: 0;
   padding: 0;
 }
+h2 {
+  color: white;
+  position: absolute;
+  margin: 1rem;
+}
 </style>

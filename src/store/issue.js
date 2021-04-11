@@ -35,8 +35,16 @@ export default {
             })
             commit('SET_DETAILS', response.data.data)
         },
-        async createIssue({__}, form) {
+        async createIssue(_, form) {
             const response = await axios.post('/v1/protected/issue/create', form, {
+                headers: {
+                    token: localStorage.getItem('token'),
+                    userId: localStorage.getItem('uID')
+                }
+            })
+        },
+        async deleteIssue(_, id) {
+            await axios.delete(`/v1/protected/issue/delete/${id}`, {
                 headers: {
                     token: localStorage.getItem('token'),
                     userId: localStorage.getItem('uID')

@@ -98,9 +98,4 @@ export default {
         font-weight: bold;
         margin-top: 10px;
     }
-    h2 {
-        color: #c8a47b;
-        position: absolute;
-        margin-left: 38rem;
-    }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <template v-if="loaded">
-    <h2 style="color:white"> Your Account</h2>
+    <h2> Your Account</h2>
     <div class="wrapper">
       <label>Name </label>
       <span>{{ getProfile.Name }}</span>
