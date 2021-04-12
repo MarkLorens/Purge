@@ -2,6 +2,7 @@
   <Navbar />
   <template v-if="loaded">
     <h2> {{ issueDetails.issue.Title }}</h2>
+    <!-- <button v-if="isUser">Edit Issue</button> -->
     <div class="wrapper">
       <label>Description </label>
       <span>{{ issueDetails.issue.Body }}</span>
@@ -27,8 +28,8 @@
     </div>
     <div class="replies">
       <div class="reply" v-for="reply in issueDetails.replies" :key="reply.id">
-        <i class="fas fa-backspace" @click="DeleteReply(reply) "></i> 
-        <span style="color:#fbce7b"> {{ issueDetails.issue.UserName }} </span>
+        <i class="fas fa-backspace" @click="DeleteReply(reply)" v-if="reply.UserID == uID"></i> 
+        <span style="color:#fbce7b"> {{ reply.Replier }} </span>
         <span> {{ reply.Body }}</span>
         <span class="created">{{ reply.CreatedAt }}</span>
       </div>
@@ -52,7 +53,9 @@ export default {
     return {
       loaded: false,
       isOpen: true,
-      Body: ''
+      Body: '',
+      // isUser: true,
+      uID: localStorage.getItem('uID')
     }
   },
   methods: {
@@ -110,6 +113,9 @@ export default {
       if(this.issueDetails.issue.Status == 0){
         this.isOpen = false
       }
+      // if(this.issueDetails.issue.UserID != this.uID) {
+      //   this.isUser = false
+      // }
     })
     .catch(() => {
       console.log('Failed');
