@@ -31,7 +31,7 @@
         <i class="fas fa-backspace" @click="DeleteReply(reply)" v-if="reply.UserID == uID"></i> 
         <span style="color:#fbce7b"> {{ reply.Replier }} </span>
         <span> {{ reply.Body }}</span>
-        <span class="created">{{ reply.CreatedAt }}</span>
+        <span class="created">{{ reply.UpdatedAt }}</span>
       </div>
     </div>
   </template>
@@ -113,6 +113,12 @@ export default {
       if(this.issueDetails.issue.Status == 0){
         this.isOpen = false
       }
+      this.issueDetails.issue.CreatedAt = new Date(this.issueDetails.issue.CreatedAt).toLocaleString()
+      this.issueDetails.issue.UpdatedAt = new Date(this.issueDetails.issue.UpdatedAt).toLocaleString()
+      for(var i = 0; i < this.issueDetails.replies.length; i += 1){
+        this.issueDetails.replies[i].UpdatedAt = new Date(this.issueDetails.replies[i].UpdatedAt).toLocaleString()
+      }
+
       // if(this.issueDetails.issue.UserID != this.uID) {
       //   this.isUser = false
       // }

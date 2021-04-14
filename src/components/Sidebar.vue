@@ -8,6 +8,8 @@
       <li><span>1: Low</span></li>
       <li><span>2: Medium</span></li>
       <li><span>3: High</span></li>
+      <hr>
+      <li><span style="font-size:0.9em">Please refresh the page if the issue cards are not dipslaying properly</span></li>
     </ul>
 </template>
 

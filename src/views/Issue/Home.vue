@@ -4,7 +4,7 @@
   <button class="btn_create" @click="createNew"><p>Create new issue</p></button>
   <div class="issues" v-if="loaded">
     <div class="issue" v-for="issue in allIssues" :key="issue.id">
-      <i class="fas fa-backspace" @click="Delete(issue) "></i> 
+      <i class="fas fa-backspace" @click="Delete(issue)" v-if="issue.UserID == uID"></i> 
       <router-link :to="{ name: 'IssueDetails', params: { id: issue.ID } }" class="link">{{ issue.Title }}</router-link>
       <span>Severity: {{ issue.Severity }}; Status: {{ issue.Status }}</span>
       <span style="color:#a6a6a1">Updated: {{ issue.UpdatedAt }}</span>
@@ -27,7 +27,8 @@ export default {
   name: 'Home',
   data() {
     return {
-      loaded: false
+      loaded: false,
+      uID: localStorage.getItem('uID'),
     }
   },
   components: {
@@ -60,10 +61,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      allIssues: 'issue/allIssues'})
+      allIssues: 'issue/allIssues'}),
   },
   created() {
     this.fetchIssues().then(() => {
+      for(var i = 0; i < this.allIssues.length; i += 1) {
+        this.allIssues[i].CreatedAt = new Date(this.allIssues[i].CreatedAt).toLocaleString()
+        this.allIssues[i].UpdatedAt = new Date(this.allIssues[i].UpdatedAt).toLocaleString()
+      }
       this.loaded = true
     })
   }
