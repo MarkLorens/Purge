@@ -2,6 +2,8 @@
 
 ## Project Description
 Purge is a platform for a development team to track their product's bugs and issues. The QA will have the privilege to post their bugs and the programmer may see, reply, discuss the posted bug.
+
+
 **This repository holds only the frontend source for the project.**
 
 ## Library Used
