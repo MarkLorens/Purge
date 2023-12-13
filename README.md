@@ -1,4 +1,4 @@
-# [Purge](https://purge-issue-tracker.herokuapp.com/)
+# [Purge](https://purge-issue-tracker.herokuapp.com/) (Heroku has taken down all website with a free plan, including this one)
 
 ## Project Description
 Purge is a platform for a development team to track their product's bugs and issues. The QA will have the privilege to post their bugs and the programmer may see, reply, discuss the posted bug.
